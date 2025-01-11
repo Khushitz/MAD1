@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="/static/adminhome.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2>Customer Dashboard</h2>
+            <ul>
+                <li><a href="{{ url_for('customer_dashboard') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('customer_search') }}">🔍 Search</a></li>
+                <li><a href="{{ url_for('customer_summary') }}">📊 Summary</a></li>
+                <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Welcome Message -->
+            <div class="welcome-banner">
+                <h1>Welcome, {{ name }}!! </h1>
+            </div>
+            
+            <main>
+                <!-- Service Request Section -->
+                <section class="service-selection">
+                    <h2 style="color: white;">Create a New Request</h2>
+                    <div class="services">
+                        <div class="service-box">
+                            <form action="{{ url_for('create_request', service_name='Plumbing') }}" method="get">
+                                <button type="submit" style="background-color: rgb(74, 162, 101); color: white;">Create New Request for Plumbing</button>
+                            </form>
+                        </div>
+                        <div class="service-box">
+                            <form action="{{ url_for('create_request', service_name='Cook') }}" method="get">
+                                <button type="submit" style="background-color: rgb(74, 162, 101); color: white;">Create New Request for Cook</button>
+                            </form>
+                        </div> 
+                        <div class="service-box">
+                            <form action="{{ url_for('create_request', service_name='Electrician') }}" method="get">
+                                <button type="submit" style="background-color: rgb(74, 162, 101); color: white;">Create New Request for Electrician</button>
+                            </form>
+                         </div>   
+                    </div>
+                </section>
+
+                <section class="service-history">
+                    <h2 style="color: white;">Service History</h2>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Service Name</th>
+                                <th>Professional Name</th>
+                                <th>Status</th>
+                                <th>Request Date</th>
+                                <th>Actions</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for request in service_requests %}
+                            <tr>
+                                <td>{{ request.request_id }}</td>
+                                <td>{{ request.service.service_name }}</td>
+                                <td>{{ request.professional.uname }}</td>
+                                <td>{{ request.status }}</td>
+                                <td>{{ request.request_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>
+                                    {% if request.status == 'approved' %}
+                                      <form action="{{ url_for('close_request', request_id=request.request_id) }}" method="post" style="display:inline;">
+                                        <button type="submit">Close Request</button>
+                                      </form>
+                                    {% elif request.status == 'closed' %}
+                                      Closed
+                                    {% else %}
+                                    <!-- No actions for other statuses -->
+                                     {% endif %}
+                                 
+                                </td>    
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

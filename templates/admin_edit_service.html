@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Service</title>
+    <link rel="stylesheet" href="/static/adminhome.css"> <!-- Optional: link to an external stylesheet -->
+</head>
+<body>
+    <h1>Edit Service</h1>
+    <form method="POST">
+        <label for="service_name">Service Name:</label><br>
+        <input type="text" id="service_name" name="service_name" value="{{ service.service_name }}" required><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description">{{ service.description }}</textarea><br>
+
+        <label for="base_price">Base Price:</label><br>
+        <input type="number" id="base_price" name="base_price" step="0.01" value="{{ service.base_price }}" required><br>
+
+        <button type="submit">Update Service</button>
+    </form>
+</body>
+</html>

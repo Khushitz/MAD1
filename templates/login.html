@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Z Household Services Login</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="logo">
+                <h2>A-Z HOUSEHOLD SERVICES</h2>
+            </div>
+
+             <!-- Flash message section -->
+             {% with messages = get_flashed_messages(with_categories=true) %}
+             {% if messages %}
+               <ul class="flashes">
+               {% for category, message in messages %}
+                 <li class="{{ category }}">{{ message }}</li>
+               {% endfor %}
+               </ul>
+             {% endif %}
+           {% endwith %}
+
+            <h3>LOGIN TO YOUR ACCOUNT</h3>
+            <form action="/login" method="POST">
+                <div class="input-field">
+                    <label for="uname">Username:</label>
+                    <input type="text" name="uname" placeholder="Enter your Username">
+                </div>
+                <div class="input-field">
+                    <label for="pwd">Password :</label>
+                    <input type="password" name="pwd" placeholder="Enter your password">
+                </div>
+                <button type="submit">LOGIN</button>
+            </form>
+            <div class="signup">
+                <p>Don’t have an account? <a href="/register">Sign Up as Customer</a></p>
+                <p><a href="/signup">Register as Professional</a></p>
+            </div>
+        </div>
+        <div class="background">
+            <!-- Add any effects or decorative elements -->
+            <div class="welcome-text">
+                <h1>Welcome.</h1>
+                <p>Discover services tailored to your needs.</p>
+                <a href="https://example.com">
+                    <img src="/static/images/✅.jpg" alt="Descriptive Alt Text" style="max-width: 100%; height: auto; max-width: 100;">
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

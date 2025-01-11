@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Page</title>
+    <link rel="stylesheet" href="/static/adminhome.css"> <!-- CSS for styling -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js library -->
+    <style>
+        /* Set all text contents to white */
+        body, h1, h2, h3, h4, h5, h6, p, a, ul, li, .chart-section {
+            color: white;
+        }
+        /* Flexbox layout for the dashboard */
+        .dashboard-container {
+            display: flex;
+            flex-direction: row; /* Change to column if you want vertical alignment */
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        /* Sidebar styling */
+        .sidebar {
+            width: 200px;
+            margin-right: 20px;
+        }
+        /* Chart sections styling */
+        .chart-section {
+            flex: 1;
+            margin: 10px;
+        }
+        /* Set specific dimensions for the canvas elements */
+        .chart-section canvas {
+            max-width: 600px; /* Adjust the width as needed */
+            max-height: 400px; /* Adjust the height as needed */
+            width: 100%; /* Ensures responsiveness */
+            height: auto; /* Maintains aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2>Customer Dashboard</h2>
+            <ul>
+                <li><a href="{{ url_for('customer_dashboard') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('customer_search') }}">🔍 Search</a></li>
+                <li><a href="{{ url_for('customer_summary') }}">📊 Summary</a></li>
+                <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Customer Ratings Pie Chart -->
+        <section class="chart-section">
+            <h2>Overall Customer Ratings</h2>
+            <canvas id="customerRatingsChart"></canvas>
+        </section>
+        
+        <!-- Service Request Summary Bar Graph -->
+        <section class="chart-section">
+            <h2>Service Request Summary</h2>
+            <canvas id="serviceRequestsChart"></canvas>
+        </section>
+    </div>
+
+    <script>
+        // Data for Customer Ratings Pie Chart
+        const customerRatingsData = {
+            labels: ['Excellent', 'Good', 'Average', 'Poor'],
+            datasets: [{
+                data: [40, 30, 20, 10], // Sample data for ratings
+                backgroundColor: ['#4caf50', '#ffeb3b', '#ff9800', '#f44336'],
+                hoverOffset: 4
+            }]
+        };
+
+        // Configuration for Customer Ratings Pie Chart
+        const customerRatingsConfig = {
+            type: 'pie',
+            data: customerRatingsData,
+            options: {
+                responsive: true
+            }
+        };
+
+        // Render Customer Ratings Pie Chart
+        const customerRatingsChart = new Chart(
+            document.getElementById('customerRatingsChart'),
+            customerRatingsConfig
+        );
+
+        // Data for Service Requests Bar Graph
+        const serviceRequestsData = {
+            labels: ['Pending', 'Completed', 'Canceled'],
+            datasets: [{
+                label: 'Service Requests',
+                data: [15, 30, 5], // Sample data for service requests
+                backgroundColor: '#2196F3'
+            }]
+        };
+
+        // Configuration for Service Requests Bar Graph
+        const serviceRequestsConfig = {
+            type: 'bar',
+            data: serviceRequestsData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Render Service Requests Bar Graph
+        const serviceRequestsChart = new Chart(
+            document.getElementById('serviceRequestsChart'),
+            serviceRequestsConfig
+        );
+    </script>
+</body>
+</html>

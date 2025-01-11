@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Request</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Poppins', sans-serif; background: url('/static/images/hhh.jpg') no-repeat center center/cover; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
+
+    <div style="background-color: rgba(9, 9, 9, 0.9); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); width: 90%; max-width: 500px;">
+        <h1 style="color: #f0efef; text-align: center; margin-bottom: 20px;">Create New Request for {{ service_name }}</h1>
+        <form method="post" style="display: flex; flex-direction: column;">
+            <div style="margin-bottom: 15px;">
+                <label for="service_name" style="font-weight: bold; margin-bottom: 5px; display: block; color: white;">Service Name:</label>
+                <input type="text" id="service_name" name="service_name" value="{{ service_name }}" readonly style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 16px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="professional" style="font-weight: bold; margin-bottom: 5px; display: block; color: white;">Professional:</label>
+                <select id="professional" name="professional" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 16px;">
+                    {% for professional in professionals %}
+                        <option value="{{ professional.user_id }}">{{ professional.user.uname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <button type="submit" style="background-color: #28a745; color: #ffffff; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background-color 0.3s ease;">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

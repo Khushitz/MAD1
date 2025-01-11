@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Reviews</title>
+    <link rel="stylesheet" href="/sta"> <!-- Optional: link to an external stylesheet -->
+</head>
+<body>
+    <h1>Manage Reviews</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Rating</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rating in ratings %}
+            <tr>
+                <td>{{ rating.service_request.service.service_name }}</td>
+                <td>{{ rating.rating }}</td>
+                <td>{{ rating.review }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="/static/adminhome.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2>Customer Dashboard</h2>
+            <ul>
+                <li><a href="{{ url_for('customer_dashboard') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('customer_search') }}">🔍 Search</a></li>
+                <li><a href="{{ url_for('customer_summary') }}">📊 Summary</a></li>
+                <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Welcome Message -->
+            <div class="welcome-banner">
+                <h1>Welcome, Customer</h1>
+            </div>
+            
+            <h1 style="color: white;">Search Services </h1>
+            <form method="get" action="{{ url_for('customer_search') }}">
+                <input type="text" name="query" placeholder="Search by professional name or service name">
+                <select name="service_filter">
+                    <option value="">All Services</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Cook">Cook</option>
+                    <option value="Electrician">Electrician</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+
+            {% if search_results %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Professional Name</th>
+                        <th>Service Name</th>
+                        <th>Base Price</th>
+                        <th>Professional ID</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in search_results %}
+                    <tr>
+                        <td>{{ result.professional_name }}</td>
+                        <td>{{ result.service_name }}</td>
+                        <td>{{ result.base_price }}</td>
+                        <td>{{ result.professional_id }}</td>
+                        <td>
+                            <a href="{{ url_for('professional_details', professional_id=result.professional_id) }}">View Profile</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No results found.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

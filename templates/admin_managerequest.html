@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Service Requests</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: link to an external stylesheet -->
+</head>
+<body>
+    <h1>Manage Service Requests</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>Customer</th>
+                <th>Professional</th>
+                <th>Service</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+            <tr>
+                <td>{{ request.request_id }}</td>
+                <td>{{ request.customer.username }}</td>
+                <td>{{ request.professional.username }}</td>
+                <td>{{ request.service.service_name }}</td>
+                <td>{{ request.status }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('update_request_status', request_id=request.request_id) }}">
+                        <select name="status">
+                            <option value="requested" {% if request.status == "requested" %}selected{% endif %}>Requested</option>
+                            <option value="accepted" {% if request.status == "accepted" %}selected{% endif %}>Accepted</option>
+                            <option value="completed" {% if request.status == "completed" %}selected{% endif %}>Completed</option>
+                            <option value="rejected" {% if request.status == "rejected" %}selected{% endif %}>Rejected</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

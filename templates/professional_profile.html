@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Profile</title>
+    <link rel="stylesheet" href="/static/adminhome.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .summary-container {
+            background-color: #050505;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .summary-container h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .summary-container li {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .summary-container a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .summary-container a:hover {
+            color: #0056b3;
+        }
+
+        .profile-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .profile-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .action-btn {
+            background-color: #28a745;
+            color: #ffffff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .action-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Professional Profile</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="uname">Username:</label>
+                <input type="text" id="uname" name="uname" value="{{ professional.uname }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ professional.professional_information.email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="service_name">Service Name:</label>
+                <input type="text" id="service_name" name="service_name" value="{{ professional.professional_information.service_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience (years):</label>
+                <input type="number" id="experience" name="experience" value="{{ professional.professional_information.experience }}" required>
+            </div>
+            <button type="submit" class="action-btn save-btn">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

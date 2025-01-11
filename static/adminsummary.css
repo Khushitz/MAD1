@@ -1,0 +1,50 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4; /* Light gray background */
+}
+
+.summary-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: white; /* White background for the container */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* Dark text */
+}
+
+.chart-section {
+    margin-bottom: 30px;
+}
+
+canvas {
+    max-width: 100%; /* Make charts responsive */
+    margin: auto;
+    display: block; /* Center the charts */
+}
+
+.navigation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-btn {
+    display: inline-block;
+    background-color: #007BFF; /* Blue button */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none; /* Remove underline from link */
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

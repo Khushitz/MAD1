@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Professional Signup</title>
+    <link rel="stylesheet" href="/static/servicesignup.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-box">
+            <h2>Service Professional Signup</h2>
+            <form action="/signup" method="post">
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="uname" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email (username)</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="service">Service Name</label>
+                    <input type="text" id="service" name="service_name" placeholder="Enter your service name" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="pwd" placeholder="Enter your password" required>
+                </div>
+                <div class="input-group">
+                    <label for="experience">Experience (in year)</label>
+                    <input type="number" id="experience" name="experience" placeholder="Enter your experience" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+            <div class="login-link">
+                <a href="/login">Login here</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

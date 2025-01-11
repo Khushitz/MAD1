@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services</title>
+    <link rel="stylesheet" href="/static/adminhome.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="main-content">
+            <h1>Available Cleaning Packages</h1>
+            <ul>
+                {% if cleaning_services %}
+                    {% for service in cleaning_services %}
+                    <li>
+                        <h2>{{ service.name }}</h2>
+                        <p>{{ service.description }}</p>
+                        <p>Price: ${{ service.base_price }}</p>
+                        <form action="{{ url_for('book_service', service_id=service.id) }}" method="post">
+                            <button type="submit">Book</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li>No cleaning services available.</li>
+                {% endif %}
+            </ul>
+            <a href="{{ url_for('customer_dashboard') }}">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

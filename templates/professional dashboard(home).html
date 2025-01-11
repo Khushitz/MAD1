@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dashboard</title>
+    <link rel="stylesheet" href="/static/adminhome.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2>Professional Dashboard</h2>
+            <ul>
+                <li><a href="{{ url_for('professional_dashboard') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('professional_search') }}">🔍 Search</a></li>
+                <li><a href="{{ url_for('professional_profile') }}">👤 Profile</a></li>
+                <li><a href="{{ url_for('professional_summary') }}">📊 Summary</a></li>
+                <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+            </ul>
+        </div>
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Welcome Message -->
+            <div class="welcome-banner">
+                <h1>Welcome, {{ name }}</h1>
+            </div>
+            <!-- Services Section -->
+            <section class="section services">
+                <h3>Today Services</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Service Name</th>
+                            <th>Customer Name</th>
+                            <th>Status</th>
+                            <th>Request Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in today_services %}
+                        <tr>
+                            <td>{{ service.request_id }}</td>
+                            <td>{{ service.service_name }}</td>
+                            <td>{{ service.customer_name }}</td>
+                            <td>{{ service.status }}</td>
+                            <td>{{ service.request_date }}</td>
+                            <td>
+                                {% if service.status == 'requested' %}
+                                <form action="{{ url_for('approve_request', request_id=service.request_id) }}" method="post" style="display:inline;">
+                                    <button type="submit" class="action-btn edit-btn">Accept</button>
+                                </form>
+                                <form action="{{ url_for('reject_request', request_id=service.request_id) }}" method="post" style="display:inline;">
+                                    <button type="submit" class="action-btn delete-btn">Reject</button>
+                                </form>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+            <!-- Closed Services Section -->
+            <section class="section professionals">
+                <h3>Closed Services</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Service Name</th>
+                            <th>Requested Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in closed_services %}
+                        <tr>
+                            <td>{{ service.id }}</td>
+                            <td>{{ service.service_name }}</td>
+                            <td>{{ service.requested_date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

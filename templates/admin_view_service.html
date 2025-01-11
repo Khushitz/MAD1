@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Services</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: link to an external stylesheet -->
+</head>
+<body>
+    <h1>Manage Services</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Service Name</th>
+                <th>Description</th>
+                <th>Base Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.service_name }}</td>
+                <td>{{ service.description }}</td>
+                <td>{{ service.base_price }}</td>
+                <td>
+                    <a href="{{ url_for('edit_service', service_id=service.service_id) }}">Edit</a> |
+                    <form action="{{ url_for('remove_service', service_id=service.service_id) }}" method="POST" style="display:inline;">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ service_name }} Packages</title>
+    <link rel="stylesheet" href="/static/adminhome.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2>Customer Dashboard</h2>
+            <ul>
+                <li><a href="{{ url_for('customer_dashboard') }}">🏠 Home</a></li>
+                <li><a href="#">🔍 Search</a></li>
+                <li><a href="#">📊 Summary</a></li>
+                <li><a href="#">🚪 Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="welcome-banner">
+                <h1>{{ service_name }} Packages</h1>
+            </div>
+            
+            <main>
+                <section class="service-packages">
+                    <h2>Select a Package</h2>
+                    <ul>
+                        {% for service in services %}
+                        <li>{{ service.name }}
+                            <form action="{{ url_for('book_service', service_id=service.id, service_name=service_name) }}" method="post" style="display:inline;">
+                                <button type="submit" class="book-link">Book</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

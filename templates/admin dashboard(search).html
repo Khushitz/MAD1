@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Search</title>
+    <link rel="stylesheet" href="/static/adminhome.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <ul>
+                <li><a href="{{ url_for('dashboard') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('admin_search') }}">🔍 Search</a></li>
+                <li><a href="{{ url_for('admin_summary') }}">📊 Summary</a></li>
+                <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 style="color: white; text-align: center;">Search Results for ram</h1>
+            <form action="{{ url_for('admin_search') }}" method="get">
+                <input type="text" name="query" placeholder="Search..." value="{{ query }}">
+                <select name="category">
+                    <option value="customers" {% if category == 'customers' %}selected{% endif %}>Customers</option>
+                    <option value="professionals" {% if category == 'professionals' %}selected{% endif %}>Professionals</option>
+                    <option value="service_requests" {% if category == 'service_requests' %}selected{% endif %}>Service Requests</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+
+            <!-- Display Search Results -->
+            {% if category == 'customers' %}
+                <h3>Customers</h3>
+                {% if search_results.customers %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for customer in search_results.customers %}
+                            <tr>
+                                <td>{{ customer.user_id }}</td>
+                                <td>{{ customer.uname }}</td>
+                                <td>{{ customer.customer_information.email }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No customers found.</p>
+                {% endif %}
+            {% elif category == 'professionals' %}
+                <h3>Professionals</h3>
+                {% if search_results.professionals %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Professional ID</th>
+                                <th>Name</th>
+                                <th>Service</th>
+                                <th>Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for professional in search_results.professionals %}
+                            <tr>
+                                <td>{{ professional.user_id }}</td>
+                                <td>{{ professional.uname }}</td>
+                                <td>{{ professional.professional_information.service_name }}</td>
+                                <td>{{ professional.professional_information.experience }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No professionals found.</p>
+                {% endif %}
+            {% elif category == 'service_requests' %}
+                <h3>Service Requests</h3>
+                {% if search_results.service_requests %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Assigned Professional</th>
+                                <th>Requested Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for request in search_results.service_requests %}
+                            <tr>
+                                <td>{{ request.request_id }}</td>
+                                <td>{{ professional_name }}</td>
+                                <td>{{ request.request_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>{{ request.status }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No service requests found.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
